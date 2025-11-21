@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+
+  <!-- CSS (app static path) -->
+  <link rel="stylesheet" href="{% static 'accounts/css/project.css' %}" />
+</head>
+<body>
+  <div class="login" role="main" aria-labelledby="login-heading">
+    <h2 id="login-heading">Login</h2>
+
+    <!-- Login form -->
+    <form method="post" action="" class="login-form" novalidate>
+      {% csrf_token %}
+      <label for="login-email" class="sr-only">Email</label>
+      <input id="login-email" type="email" name="email" placeholder="Email" required class="overlay" />
+
+      <label for="login-password" class="sr-only">Password</label>
+      <input id="login-password" type="password" name="password" placeholder="Password" required class="overlay" />
+
+      <input type="submit" value="Login" class="btn" />
+    </form>
+
+    <div class="links">
+      <a href="#" id="openSignup">New User? Sign up</a>
+      <a href="#" id="openForgot">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- Sign up popup -->
+  <div class="new-user" id="signup" aria-hidden="true">
+    <div class="popup-box" role="dialog" aria-modal="true" aria-labelledby="signup-heading">
+      <button class="close-button" id="closeSignup" aria-label="Close sign up dialog">&times;</button>
+
+      <form method="post" action="{% url 'signup' %}" class="create-account" novalidate>
+        {% csrf_token %}
+        <h3 id="signup-heading">Create a New Account</h3>
+
+        <div class="fields">
+          <label for="first-name" class="sr-only">First name</label>
+          <input id="first-name" type="text" name="firstname" placeholder="First name" required />
+
+          <label for="last-name" class="sr-only">Last name</label>
+          <input id="last-name" type="text" name="lastname" placeholder="Last name" required />
+        </div>
+
+        <label for="signup-email" class="sr-only">Email</label>
+        <input id="signup-email" type="email" name="email" placeholder="Email" required />
+
+        <label for="signup-password" class="sr-only">New password</label>
+        <input id="signup-password" type="password" name="password" placeholder="New password" required />
+
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" required>
+          <option disabled selected>Select Branch</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+        </select>
+
+        <label for="year">Year</label>
+        <select id="year" name="year" required>
+          <option disabled selected>Select Year</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+          <option value="4th">4th</option>
+        </select>
+
+        <label for="reg-id" class="sr-only">Registration No.</label>
+        <input id="reg-id" type="text" name="reg_id" placeholder="Registration No." required />
+
+        <fieldset class="gender-box" aria-label="Gender">
+          <legend class="sr-only">Gender</legend>
+          <label><input type="radio" name="gender" value="female" required /> Female</label>
+          <label><input type="radio" name="gender" value="male" /> Male</label>
+          <label><input type="radio" name="gender" value="custom" /> Custom</label>
+        </fieldset>
+
+        <input type="submit" value="Sign Up" class="btn" />
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot password popup -->
+  <div class="forgot" id="verify" aria-hidden="true">
+    <div class="popup-box" role="dialog" aria-modal="true" aria-labelledby="forgot-heading">
+      <button class="forgot-button" id="closeForgot" aria-label="Close forgot dialog">&times;</button>
+
+      <form method="post" action="{% url 'forgot' %}" class="forgot-password" novalidate>
+        {% csrf_token %}
+        <h3 id="forgot-heading">Find Your Account</h3>
+
+        <label for="forgot-id" class="sr-only">Registration No</label>
+        <input id="forgot-id" type="text" name="reg_id" placeholder="Registration No." />
+
+        <label for="forgot-email" class="sr-only">Registered Mail</label>
+        <input id="forgot-email" type="email" name="email" placeholder="Registered Mail" />
+
+        <input type="submit" value="Verify" class="close-btn">
+      </form>
+    </div>
+  </div>
+
+  <!-- JS (app static path) -->
+  <script src="{% static 'accounts/js/login.js' %}"></script>
+</body>
+</html>
